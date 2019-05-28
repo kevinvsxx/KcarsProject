@@ -10,22 +10,23 @@ using Project.Models;
 
 namespace Project.Controllers
 {
-    public class ArtikelController : Controller
+    public class BestellingController : Controller
     {
         private readonly EFContext _context;
 
-        public ArtikelController(EFContext context)
+        public BestellingController(EFContext context)
         {
             _context = context;
         }
 
-        // GET: Artikels
+        // GET: Bestellings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Artikels.ToListAsync());
+            var eFContext = _context.Bestellingen.Include(b => b.Klant);
+            return View(await eFContext.ToListAsync());
         }
 
-        // GET: Artikels/Details/5
+        // GET: Bestellings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels
-                .FirstOrDefaultAsync(m => m.ArtikelID == id);
-            if (artikel == null)
+            var bestelling = await _context.Bestellingen
+                .Include(b => b.Klant)
+                .FirstOrDefaultAsync(m => m.BestellingID == id);
+            if (bestelling == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(bestelling);
         }
 
-        // GET: Artikels/Create
+        // GET: Bestellings/Create
         public IActionResult Create()
         {
+            ViewData["KlantID"] = new SelectList(_context.Klanten, "KlantID", "Naam");
             return View();
         }
 
-        // POST: Artikels/Create
+        // POST: Bestellings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtikelID,Naam,Beschrijving,Prijs")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("BestellingID,KlantID")] Bestelling bestelling)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artikel);
+                _context.Add(bestelling);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(artikel);
+            ViewData["KlantID"] = new SelectList(_context.Klanten, "KlantID", "Naam", bestelling.KlantID);
+            return View(bestelling);
         }
 
-        // GET: Artikels/Edit/5
+        // GET: Bestellings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels.FindAsync(id);
-            if (artikel == null)
+            var bestelling = await _context.Bestellingen.FindAsync(id);
+            if (bestelling == null)
             {
                 return NotFound();
             }
-            return View(artikel);
+            ViewData["KlantID"] = new SelectList(_context.Klanten, "KlantID", "Naam", bestelling.KlantID);
+            return View(bestelling);
         }
 
-        // POST: Artikels/Edit/5
+        // POST: Bestellings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtikelID,Naam,Beschrijving,Prijs")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("BestellingID,KlantID")] Bestelling bestelling)
         {
-            if (id != artikel.ArtikelID)
+            if (id != bestelling.BestellingID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace Project.Controllers
             {
                 try
                 {
-                    _context.Update(artikel);
+                    _context.Update(bestelling);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtikelExists(artikel.ArtikelID))
+                    if (!BestellingExists(bestelling.BestellingID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(artikel);
+            ViewData["KlantID"] = new SelectList(_context.Klanten, "KlantID", "Naam", bestelling.KlantID);
+            return View(bestelling);
         }
 
-        // GET: Artikels/Delete/5
+        // GET: Bestellings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels
-                .FirstOrDefaultAsync(m => m.ArtikelID == id);
-            if (artikel == null)
+            var bestelling = await _context.Bestellingen
+                .Include(b => b.Klant)
+                .FirstOrDefaultAsync(m => m.BestellingID == id);
+            if (bestelling == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(bestelling);
         }
 
-        // POST: Artikels/Delete/5
+        // POST: Bestellings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var artikel = await _context.Artikels.FindAsync(id);
-            _context.Artikels.Remove(artikel);
+            var bestelling = await _context.Bestellingen.FindAsync(id);
+            _context.Bestellingen.Remove(bestelling);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtikelExists(int id)
+        private bool BestellingExists(int id)
         {
-            return _context.Artikels.Any(e => e.ArtikelID == id);
+            return _context.Bestellingen.Any(e => e.BestellingID == id);
         }
     }
 }

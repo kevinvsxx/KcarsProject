@@ -13,6 +13,7 @@ namespace Project.Models
         [Required]
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
+        public double Prijs { get; set; }
         public ICollection<BestellingArtikel> BestellingArtikels { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Project.Models.Artikel
+﻿@model Project.Models.Klant
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-<h4>Artikel</h4>
+<h4>Klant</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,9 +18,14 @@
                 <span asp-validation-for="Naam" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                <label asp-for="Voornaam" class="control-label"></label>
+                <input asp-for="Voornaam" class="form-control" />
+                <span asp-validation-for="Voornaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AangemaaktDatum" class="control-label"></label>
+                <input asp-for="AangemaaktDatum" class="form-control" />
+                <span asp-validation-for="AangemaaktDatum" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

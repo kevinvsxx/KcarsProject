@@ -10,7 +10,6 @@ namespace Project.Models
     {
         [Key]
         public int BestellingID { get; set; }
-        public decimal Prijs { get; set; }
         public int KlantID { get; set; }
         public Klant Klant { get; set; }
         public ICollection<BestellingArtikel> BestellingArtikels { get; set; }

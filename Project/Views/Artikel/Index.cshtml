@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Beschrijving)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijs)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Beschrijving)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ArtikelID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ArtikelID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ArtikelID">Delete</a>
             </td>
         </tr>
 }

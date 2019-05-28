@@ -10,22 +10,22 @@ using Project.Models;
 
 namespace Project.Controllers
 {
-    public class ArtikelController : Controller
+    public class KlantController : Controller
     {
         private readonly EFContext _context;
 
-        public ArtikelController(EFContext context)
+        public KlantController(EFContext context)
         {
             _context = context;
         }
 
-        // GET: Artikels
+        // GET: Klants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Artikels.ToListAsync());
+            return View(await _context.Klanten.ToListAsync());
         }
 
-        // GET: Artikels/Details/5
+        // GET: Klants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels
-                .FirstOrDefaultAsync(m => m.ArtikelID == id);
-            if (artikel == null)
+            var klant = await _context.Klanten
+                .FirstOrDefaultAsync(m => m.KlantID == id);
+            if (klant == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(klant);
         }
 
-        // GET: Artikels/Create
+        // GET: Klants/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Artikels/Create
+        // POST: Klants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtikelID,Naam,Beschrijving,Prijs")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("KlantID,Naam,Voornaam,AangemaaktDatum")] Klant klant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artikel);
+                _context.Add(klant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(artikel);
+            return View(klant);
         }
 
-        // GET: Artikels/Edit/5
+        // GET: Klants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels.FindAsync(id);
-            if (artikel == null)
+            var klant = await _context.Klanten.FindAsync(id);
+            if (klant == null)
             {
                 return NotFound();
             }
-            return View(artikel);
+            return View(klant);
         }
 
-        // POST: Artikels/Edit/5
+        // POST: Klants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtikelID,Naam,Beschrijving,Prijs")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("KlantID,Naam,Voornaam,AangemaaktDatum")] Klant klant)
         {
-            if (id != artikel.ArtikelID)
+            if (id != klant.KlantID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Project.Controllers
             {
                 try
                 {
-                    _context.Update(artikel);
+                    _context.Update(klant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArtikelExists(artikel.ArtikelID))
+                    if (!KlantExists(klant.KlantID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(artikel);
+            return View(klant);
         }
 
-        // GET: Artikels/Delete/5
+        // GET: Klants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.Artikels
-                .FirstOrDefaultAsync(m => m.ArtikelID == id);
-            if (artikel == null)
+            var klant = await _context.Klanten
+                .FirstOrDefaultAsync(m => m.KlantID == id);
+            if (klant == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(klant);
         }
 
-        // POST: Artikels/Delete/5
+        // POST: Klants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var artikel = await _context.Artikels.FindAsync(id);
-            _context.Artikels.Remove(artikel);
+            var klant = await _context.Klanten.FindAsync(id);
+            _context.Klanten.Remove(klant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtikelExists(int id)
+        private bool KlantExists(int id)
         {
-            return _context.Artikels.Any(e => e.ArtikelID == id);
+            return _context.Klanten.Any(e => e.KlantID == id);
         }
     }
 }
