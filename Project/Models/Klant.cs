@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,8 @@ namespace Project.Models
 {
     public class Klant
     {
-        public int Id { get; set; }
+        [Key]
+        public int KlantID { get; set; }
         [Required]
         public string Naam { get; set; }
         public string Voornaam { get; set; }
@@ -16,7 +18,8 @@ namespace Project.Models
         [DataType(DataType.Date)]
         public DateTime AangemaaktDatum { get; set; }
         public ICollection<Bestelling> Bestellingen { get; set; }
-        public string klantDisplay
+        [NotMapped]
+        public string KlantDisplay
         {
             get
             {

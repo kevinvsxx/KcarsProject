@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    public class Bestelling
+    public class BestellingArtikel
     {
         [Key]
+        public int BestellingArtikelID { get; set; }
         public int BestellingID { get; set; }
-        public decimal Prijs { get; set; }
-        public int KlantID { get; set; }
-        public Klant Klant { get; set; }
-        public ICollection<BestellingArtikel> BestellingArtikels { get; set; }
+        public Bestelling Bestelling { get; set; }
+
+        public int ArtikelID { get; set; }
+        public Artikel Artikel { get; set; }
     }
 }

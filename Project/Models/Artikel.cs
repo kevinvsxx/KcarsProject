@@ -8,10 +8,11 @@ namespace Project.Models
 {
     public class Artikel
     {
-        public int Id { get; set; }
+        [Key]
+        public int ArtikelID { get; set; }
         [Required]
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
-        public ICollection<Bestelling> Bestellingen { get; set; }
+        public ICollection<BestellingArtikel> BestellingArtikels { get; set; }
     }
 }

@@ -14,9 +14,10 @@ namespace Project.Data
         {
 
         }
-        public DbSet<Klant> klanten { get; set; }
-        public DbSet<Bestelling> bestellingen { get; set; }
-        public DbSet<Artikel> artikels { get; set; }
+        public DbSet<Klant> Klanten { get; set; }
+        public DbSet<Bestelling> Bestellingen { get; set; }
+        public DbSet<Artikel> Artikels { get; set; }
+        public DbSet<BestellingArtikel> BestellingArtikels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,7 @@ namespace Project.Data
             modelBuilder.Entity<Klant>().ToTable("Klant");
             modelBuilder.Entity<Bestelling>().ToTable("Bestelling");
             modelBuilder.Entity<Artikel>().ToTable("Artikel");
+            modelBuilder.Entity<BestellingArtikel>().ToTable("BestellingArtikel");
         }
     }
 }
