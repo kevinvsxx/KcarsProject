@@ -14,18 +14,20 @@ namespace Project.Data
         {
 
         }
-        public DbSet<Klant> Klanten { get; set; }
-        public DbSet<Bestelling> Bestellingen { get; set; }
-        public DbSet<Artikel> Artikels { get; set; }
-        public DbSet<BestellingArtikel> BestellingArtikels { get; set; }
+        public DbSet<Auto> Autos { get; set; }
+        public DbSet<Piloot> Piloots { get; set; }
+        public DbSet<Race> Races { get; set; }
+        public DbSet<Circuit> Circuits { get; set; }
+        public DbSet<AutoRace> AutoRaces { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Klant>().ToTable("Klant");
-            modelBuilder.Entity<Bestelling>().ToTable("Bestelling");
-            modelBuilder.Entity<Artikel>().ToTable("Artikel");
-            modelBuilder.Entity<BestellingArtikel>().ToTable("BestellingArtikel");
+            modelBuilder.Entity<Auto>().ToTable("Auto");
+            modelBuilder.Entity<Piloot>().ToTable("Piloot");
+            modelBuilder.Entity<Race>().ToTable("Race");
+            modelBuilder.Entity<Circuit>().ToTable("Circuit");
+            modelBuilder.Entity<AutoRace>().ToTable("AutoRace");
         }
     }
 }

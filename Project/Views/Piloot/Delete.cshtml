@@ -1,0 +1,39 @@
+﻿@model Project.Models.Piloot
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Piloot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Voornaam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Voornaam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Auto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Auto.Merk)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PilootID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

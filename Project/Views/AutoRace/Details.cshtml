@@ -1,0 +1,30 @@
+﻿@model Project.Models.AutoRace
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AutoRace</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Auto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Auto.Merk)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Race)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Race.RaceID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AutoRaceID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
