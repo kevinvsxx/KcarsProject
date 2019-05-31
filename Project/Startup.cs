@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Project.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Project.Areas.Identity.Data;
 
 namespace Project
 {
@@ -28,9 +29,10 @@ namespace Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EFContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EFConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-            .AddRoles<IdentityRole>()
-            //AddDefaultUI(UIFramework.Boodstrap4)
+            services.AddIdentity<CustomUser, IdentityRole>()
+
+            .AddRoleManager<RoleManager<IdentityRole>>()
+
             .AddEntityFrameworkStores<EFContext>();
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -39,11 +41,11 @@ namespace Project
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<EFContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<EFContext>();
+            //services.AddDbContext<EFContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDefaultIdentity<IdentityUser>()
+            //    .AddEntityFrameworkStores<EFContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
