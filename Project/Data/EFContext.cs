@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Project.Areas.Identity.Data;
 
 namespace Project.Data
 {
-    public class EFContext : IdentityDbContext
+    public class EFContext : IdentityDbContext<CustomUser>
     { 
         public EFContext(DbContextOptions<EFContext> options) : base(options)
         {

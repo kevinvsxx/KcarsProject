@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,12 @@ using Project.Models;
 
 namespace Project.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RaceController : Controller
     {
+
         private readonly EFContext _context;
+
 
         public RaceController(EFContext context)
         {
@@ -20,6 +24,7 @@ namespace Project.Controllers
         }
 
         // GET: Race
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var eFContext = _context.Races.Include(r => r.Circuit);
@@ -27,6 +32,7 @@ namespace Project.Controllers
         }
 
         // GET: Race/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

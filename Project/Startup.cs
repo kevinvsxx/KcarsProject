@@ -40,6 +40,12 @@ namespace Project
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.ConfigureApplicationCookie(options =>
+             {
+                 options.LoginPath = "/Identity/Account/LogIn";
+                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                 }
+            );
 
             //services.AddDbContext<EFContext>(options =>
             //    options.UseSqlServer(
