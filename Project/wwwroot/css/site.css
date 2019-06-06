@@ -3,8 +3,11 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    color: black;
+    color: red;
     background-color: white;
+}
+.nav > li.disabled > a {
+    color: red;
 }
 
 /* Wrapping element */
